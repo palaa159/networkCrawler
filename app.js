@@ -8,6 +8,10 @@ var wireless = require('wireless'),
     sys = require('sys'),
     exec = require('child_process').exec;
 
+function puts(error, stdout, stderr) {
+}
+exec("sudo pkill gpsd", puts);
+exec("sudo gpsd -n -D 2 /dev/ttyUSB0", puts);
 
 var latlng;
 
@@ -51,8 +55,9 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-
+    if(location.geometries.coordinates[0] !== undefined) {
     util.log(latlng + ', ' + ssid);
+    }
 
 });
 
