@@ -34,7 +34,7 @@ gps.on('connect', function() {
     // reboot gps
 });
 gps.on('location', function(location) {
-    latlng = JSON.stringigy(location.geometries);
+    latlng = JSON.stringify(location.geometries);
     console.log(latlng);
 });
 // Found a new network
