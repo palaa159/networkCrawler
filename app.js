@@ -8,9 +8,8 @@ var wireless = require('wireless'),
     sys = require('sys'),
     exec = require('child_process').exec;
 
-function puts(stderr, stdout, std) {
-    
-}
+
+var latlng;
 
 wireless.configure({
     iface: 'wlan0',
@@ -31,7 +30,9 @@ gps.on('connect', function() {
     util.log('connected to gps module');
     // reboot gps
 });
-
+gps.on('location', function(location) {
+    latlng = location.geometries;
+});
 // Found a new network
 wireless.on('appear', function(error, network) {
     if (error) {
@@ -51,7 +52,7 @@ wireless.on('appear', function(error, network) {
         encryption_type = 'WPA2';
     }
 
-    util.log(ssid);
+    util.log(latlng + ' ' + ssid);
 
 });
 
