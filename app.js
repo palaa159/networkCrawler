@@ -12,7 +12,7 @@ function puts(error, stdout, stderr) {
 }
 exec("sudo gpsd -n -D 2 /dev/ttyUSB0", puts);
 
-var latlng, ifNull;
+var latlng, ifNull, nCounter = 0;
 
 wireless.configure({
     iface: 'wlan0',
@@ -56,7 +56,15 @@ wireless.on('appear', function(error, network) {
         encryption_type = 'WPA2';
     }
     if(ifNull !== undefined) {
-    util.log(latlng + ', ' + ssid);
+        nCounter++;
+        fs.writeFile('nCounter.txt', nCounter, function(err) {
+            if(err) throw err;
+            console.log('number saved: ' + nCounter);
+        });
+        fs.appendFile('data.txt', latlng + ', ' + ssid + '\n', function(err) {
+            if(err) throw err;
+            console.log('data saved' + latlng + ', ' + ssid);
+        });
     }
 
 });
