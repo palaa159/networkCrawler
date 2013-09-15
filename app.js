@@ -35,7 +35,7 @@ gps.on('connect', function() {
 });
 gps.on('location', function(location) {
     ifNull = location.geometries.coordinates[0];
-    latlng = location.geometries.coordinates;
+    latlng = JSON.stringify(location.geometries.coordinates);
 });
 // Found a new network
 wireless.on('appear', function(error, network) {
