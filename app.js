@@ -8,8 +8,7 @@ var wireless = require('wireless'),
     sys = require('sys'),
     exec = require('child_process').exec;
 
-function puts(error, stdout, stderr) {
-}
+function puts(error, stdout, stderr) {}
 exec("sudo gpsd -n -D 2 /dev/ttyUSB0", puts);
 
 var latlng, ifNull, nCounter = 0;
@@ -34,9 +33,10 @@ gps.on('connect', function() {
     // reboot gps
 });
 gps.on('location', function(location) {
-    latlng = location.geometries.coordinates;
-    console.log(latlng);
-
+    if (location.geometries.coordinates[0] !== undefined) {
+        latlng = location.geometries.coordinates;
+        console.log(latlng);
+    }
 });
 // Found a new network
 wireless.on('appear', function(error, network) {
@@ -56,18 +56,18 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    // if(latlng.coordinates[0] !== undefined) {
-    //     nCounter++;
-    //     fs.writeFile('nCounter.txt', nCounter, function(err) {
-    //         if(err) throw err;
-    //         console.log('number saved: ' + nCounter);
-    //     });
-    //     var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng.coordinates[0] + ',' + latlng.coordinates[1] + '[}"\n';
-    //     fs.appendFile('data.csv', write, function(err) {
-    //         if(err) throw err;
-    //         console.log('data saved: ' + write);
-    //     });
-    // }
+    if(latlng[0] !== undefined) {
+        nCounter++;
+        fs.writeFile('nCounter.txt', nCounter, function(err) {
+            if(err) throw err;
+            console.log('number saved: ' + nCounter);
+        });
+        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng[0] + ',' + latlng[1] + '[}"\n';
+        fs.appendFile('data.csv', write, function(err) {
+            if(err) throw err;
+            console.log('data saved: ' + write);
+        });
+    }
 
 });
 
