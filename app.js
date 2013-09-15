@@ -55,7 +55,7 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    if(ifNull !== undefined) {
+    // if(ifNull !== undefined) {
         nCounter++;
         fs.writeFile('nCounter.txt', nCounter, function(err) {
             if(err) throw err;
@@ -65,7 +65,7 @@ wireless.on('appear', function(error, network) {
             if(err) throw err;
             console.log('data saved' + latlng + ', ' + ssid);
         });
-    }
+    // }
 
 });
 
