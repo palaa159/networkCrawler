@@ -28,16 +28,16 @@ wireless.enable(function() {
     });
 });
 
-gps.on('connect', function() {
-    util.log('connected to gps module');
-    // reboot gps
-});
-gps.on('location', function(location) {
-    if (location.geometries.coordinates[0] !== undefined) {
-        latlng = location.geometries.coordinates;
-        console.log(latlng[0] + ', ' + latlng[1]);
-    }
-});
+// gps.on('connect', function() {
+//     util.log('connected to gps module');
+//     // reboot gps
+// });
+// gps.on('location', function(location) {
+//     if (location.geometries.coordinates[0] !== undefined) {
+//         latlng = location.geometries.coordinates;
+//         console.log(latlng[0] + ', ' + latlng[1]);
+//     }
+// });
 // Found a new network
 wireless.on('appear', function(error, network) {
     if (error) {
@@ -56,18 +56,18 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    if(latlng !== undefined) {
+    // if(latlng !== undefined) {
         nCounter++;
         fs.writeFile('nCounter.txt', nCounter, function(err) {
             if(err) throw err;
             console.log('number saved: ' + nCounter);
         });
-        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng[0] + ',' + latlng[1] + ']}"\n';
+        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + 'latlng[0]' + ',' + 'latlng[1]' + ']}"\n';
         fs.appendFile('data.csv', write, function(err) {
             if(err) throw err;
             console.log('data saved: ' + write);
         });
-    }
+    // }
 
 });
 
