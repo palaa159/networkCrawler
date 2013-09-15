@@ -10,7 +10,6 @@ var wireless = require('wireless'),
 
 function puts(error, stdout, stderr) {
 }
-exec("sudo pkill gpsd", puts);
 exec("sudo gpsd -n -D 2 /dev/ttyUSB0", puts);
 
 var latlng, ifNull;
