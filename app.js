@@ -31,7 +31,7 @@ gps.on('connect', function() {
     // reboot gps
 });
 gps.on('location', function(location) {
-    latlng = location.geometries;
+    latlng = JSON.stringify(location.geometries);
 });
 // Found a new network
 wireless.on('appear', function(error, network) {
@@ -52,7 +52,7 @@ wireless.on('appear', function(error, network) {
         encryption_type = 'WPA2';
     }
 
-    util.log(latlng + ' ' + ssid);
+    util.log(latlng + ', ' + ssid);
 
 });
 
