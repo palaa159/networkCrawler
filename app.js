@@ -18,14 +18,14 @@ wireless.configure({
     vanishThreshold: 7,
 });
 
-// wireless.enable(function() {
-//     console.log(("[PROGRESS] Wireless card enabled.").cyan);
-//     console.log(("[PROGRESS] Starting wireless scan...").cyan);
+wireless.enable(function() {
+    console.log(("[PROGRESS] Wireless card enabled.").cyan);
+    console.log(("[PROGRESS] Starting wireless scan...").cyan);
 
-//     wireless.start(function() {
-//         console.log(("[PROGRESS] Wireless scanning has commenced.").cyan);
-//     });
-// });
+    wireless.start(function() {
+        console.log(("[PROGRESS] Wireless scanning has commenced.").cyan);
+    });
+});
 
 gps.on('connect', function() {
     util.log('connected to gps module');
@@ -51,7 +51,8 @@ wireless.on('appear', function(error, network) {
         encryption_type = 'WPA2';
     }
 
-    util.log(ssid + ' ' + quality);
+    util.log(ssid);
+
 });
 
 // Just for debugging purposes
