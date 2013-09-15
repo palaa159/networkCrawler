@@ -35,7 +35,7 @@ gps.on('connect', function() {
 });
 gps.on('location', function(location) {
     ifNull = location.geometries.coordinates[0];
-    latlng = JSON.stringify(location.geometries);
+    latlng = location.geometries.coordinates;
 });
 // Found a new network
 wireless.on('appear', function(error, network) {
@@ -61,9 +61,10 @@ wireless.on('appear', function(error, network) {
             if(err) throw err;
             console.log('number saved: ' + nCounter);
         });
-        fs.appendFile('data.txt', latlng + ', ' + ssid + '\n', function(err) {
+        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng[0] + ',' + latlng[1] + '[}"\n';
+        fs.appendFile('data.csv', write, function(err) {
             if(err) throw err;
-            console.log('data saved' + latlng + ', ' + ssid);
+            console.log('data saved: ' + write);
         });
     // }
 
