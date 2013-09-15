@@ -63,7 +63,7 @@ wireless.on('appear', function(error, network) {
             if(err) throw err;
             console.log('number saved: ' + nCounter);
         });
-        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng[0] + ',' + latlng[1] + ']}"\n';
+        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + 'latlng[0]' + ',' + 'latlng[1]' + ']}"\n';
         fs.appendFile('data.csv', write, function(err) {
             if(err) throw err;
             console.log('data saved: ' + write);
