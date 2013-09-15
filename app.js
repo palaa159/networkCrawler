@@ -35,7 +35,7 @@ gps.on('connect', function() {
 gps.on('location', function(location) {
     if (location.geometries.coordinates[0] !== undefined) {
         latlng = location.geometries.coordinates;
-        console.log(latlng);
+        console.log(latlng[0] + ', ' + latlng[1]);
     }
 });
 // Found a new network
@@ -56,7 +56,7 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    if(latlng[0] !== undefined) {
+    if(latlng !== undefined) {
         nCounter++;
         fs.writeFile('nCounter.txt', nCounter, function(err) {
             if(err) throw err;
