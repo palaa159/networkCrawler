@@ -36,9 +36,8 @@ gps.on('connect', function() {
 gps.on('location', function(location) {
     latlng = JSON.stringify(location.geometries.coordinates);
     console.log(latlng);
-});
-// Found a new network
-wireless.on('appear', function(error, network) {
+    if(latlng[0] !== null)
+    wireless.on('appear', function(error, network) {
     if (error) {
         console.log("[   ERROR] There was an error when a network appeared");
         throw error;
@@ -69,6 +68,8 @@ wireless.on('appear', function(error, network) {
     // }
 
 });
+});
+// Found a new network
 
 // Just for debugging purposes
 wireless.on('debug', function(error, command) {
