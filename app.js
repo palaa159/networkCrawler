@@ -35,7 +35,8 @@ gps.on('connect', function() {
 });
 gps.on('location', function(location) {
     latlng = JSON.stringify(location.geometries);
-    console.log(latlng.coordinates);
+    console.log(latlng.coordinates[0]);
+    console.log(latlng.coordinates[1]);
 });
 // Found a new network
 wireless.on('appear', function(error, network) {
@@ -55,17 +56,17 @@ wireless.on('appear', function(error, network) {
     } else if (network.encryption_wpa2) {
         encryption_type = 'WPA2';
     }
-    // if(ifNull !== undefined) {
-        nCounter++;
-        fs.writeFile('nCounter.txt', nCounter, function(err) {
-            if(err) throw err;
-            console.log('number saved: ' + nCounter);
-        });
-        var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng.coordinates[0] + ',' + latlng.coordinates[1] + '[}"\n';
-        fs.appendFile('data.csv', write, function(err) {
-            if(err) throw err;
-            console.log('data saved: ' + write);
-        });
+    // if(latlng.coordinates[0] !== undefined) {
+    //     nCounter++;
+    //     fs.writeFile('nCounter.txt', nCounter, function(err) {
+    //         if(err) throw err;
+    //         console.log('number saved: ' + nCounter);
+    //     });
+    //     var write = ssid + ',"{""type"":""Point"",""coordinates"":[' + latlng.coordinates[0] + ',' + latlng.coordinates[1] + '[}"\n';
+    //     fs.appendFile('data.csv', write, function(err) {
+    //         if(err) throw err;
+    //         console.log('data saved: ' + write);
+    //     });
     // }
 
 });
